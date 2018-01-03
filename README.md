@@ -5,6 +5,9 @@ keras
 h5py
 cv2
 
+
+
+
 source data 
          ---HTRU Medlat Training Data
 step 1
@@ -17,5 +20,5 @@ step 3
      ---python main.py
 
 step 4
-     ---evaluate the model
+     ---python feats_and_plot.py
         ---plot_evaluate

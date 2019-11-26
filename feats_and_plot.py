@@ -7,6 +7,9 @@ np.random.seed(2017) # 固定随机种子
 import cv2,h5py
 from sklearn.utils import shuffle
 from sklearn import preprocessing
+import matplotlib
+#this will prevent the figure from popping up
+matplotlib.use('Agg')
 import pylab as plt
 from sklearn import metrics
 from sklearn.metrics import roc_curve, auc
@@ -216,7 +219,8 @@ def phase_plots(cand):
     plt.xlabel('Phase Bin Index')
     
     plt.tight_layout()
-    plt.show()
+    plt.savefig('phase.pdf')
+    #plt.show()
 
 # 显示s/n信息 信噪比矩阵
 def bullseye_plot(cand):
@@ -246,7 +250,8 @@ def bullseye_plot(cand):
     cb.set_label(u'Folded S/N(color-bar)')
     
     plt.tight_layout()
-    plt.show()
+    plt.savefig('SN.pdf')
+    #plt.show()
 
 # 测试单个样本
 def test_single_samples( file_name ):
@@ -343,8 +348,9 @@ def plot1():
     # plt.ylim(0.2968,0.2969)
     plt.xlabel('Log(Period/DM)')
     plt.ylabel('W_eq')
-
-    plt.show()
+    
+    plt.savefig('plot1.pdf')
+    #plt.show()
 
 # 添加的8个公式中的前4个    普通点图
 def plot2():
@@ -428,7 +434,8 @@ def plot2():
     plt.xlabel('mean(p)')
     plt.ylabel('p_3')
 
-    plt.show()
+    plt.savefig('plot2.pdf')
+    #plt.show()
 
 
 def plot3():
@@ -514,8 +521,9 @@ def plot3():
     # plt.ylim(0.2968,0.2969)
     plt.xlabel('mean(d)')
     plt.ylabel('d_3')
-
-    plt.show()
+    
+    plt.savefig('plot3.pdf')
+    #plt.show()
 
 
 def plot4_1():
@@ -554,7 +562,8 @@ def plot4_1():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot41.pdf')
+    #plt.show()
 
 
 def plot4_2():
@@ -599,7 +608,8 @@ def plot4_2():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot42.pdf')
+    #plt.show()
 
 # 画图各后加的8个特征与label之间的柱状图
 def plot5_1():
@@ -644,7 +654,8 @@ def plot5_1():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot51_pdf')
+    #plt.show()
 
 # 画图各后加的8个特征与label之间的半透明点图
 def plot5_2():
@@ -689,7 +700,8 @@ def plot5_2():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot52.pdf')
+    #plt.show()
 
 # 画图各后加的8个特征与label之间的柱状图
 def plot6_1():
@@ -737,7 +749,8 @@ def plot6_1():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot61.pdf')
+    #plt.show()
 
 # 画图各后加的8个特征与label之间的半透明点图
 def plot6_2():
@@ -785,7 +798,8 @@ def plot6_2():
         plt.xlabel('%s'%column[0])
         plt.ylabel('counts')
         plt.legend()
-    plt.show()
+    plt.savefig('plot62.pdf')
+    #plt.show()
 
 # main执行完毕后 才能运行该方法
 
@@ -829,7 +843,8 @@ def plot_evaluate():
     plt.legend()
     plt.xlabel("MY model score threshold")
     plt.ylabel('rate (10^-y)')
-    plt.show()
+    plt.savefig('eval.pdf')
+    #plt.show()
 
 
 def plot_scorethreshold():
@@ -851,16 +866,16 @@ if __name__ == '__main__':
     # get_all_samples_feats() 
     # test_single_samples('./data/MedlatTrainingData/pulsars/pulsar_0229.phcx')
     # test_single_samples('./data/MedlatTrainingData/RFI/cand_000001.phcx')
-    # plot1()
-    # plot2()
-    # plot3()
-    # plot4_1()
-    # plot4_2()
-    # plot5_1()
-    # plot5_2()
-    # plot6_1()
-    # plot6_2()
-    # plot_evaluate()
+    plot1()
+    plot2()
+    plot3()
+    plot4_1()
+    plot4_2()
+    plot5_1()
+    plot5_2()
+    plot6_1()
+    plot6_2()
+    plot_evaluate()
     plot_scorethreshold()
 
 

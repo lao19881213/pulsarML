@@ -16,7 +16,7 @@ from sklearn.metrics import roc_curve, auc
 
 from config import config
 from utils import *
-
+import argparse
 
 # 爬取phcx数据接口
 class Candidate(object):
@@ -863,20 +863,31 @@ def plot_scorethreshold():
         print " False positive rate: ", 1.*FP / (FP + TN)
 
 if __name__ == '__main__':
-    # get_all_samples_feats() 
+
+    parser = argparse.ArgumentParser(description='Pulsar ML.',
+                                     epilog='')
+    parser.add_argument('--step', dest='step', type=int, nargs='?', help='Step: 1. get_all_samples_feats, 2. plot evaluate ') 
+    
+    args = parser.parse_args()   
+    if args.step == 1:
+       get_all_samples_feats()
+    elif args.step == 2: 
     # test_single_samples('./data/MedlatTrainingData/pulsars/pulsar_0229.phcx')
     # test_single_samples('./data/MedlatTrainingData/RFI/cand_000001.phcx')
-    plot1()
-    plot2()
-    plot3()
-    plot4_1()
-    plot4_2()
-    plot5_1()
-    plot5_2()
-    plot6_1()
-    plot6_2()
-    plot_evaluate()
-    plot_scorethreshold()
+       plot1()
+       plot2()
+       plot3()
+       plot4_1()
+       plot4_2()
+       plot5_1()
+       plot5_2()
+       plot6_1()
+       plot6_2()
+       plot_evaluate()
+       plot_scorethreshold()
+    else :
+       print("Please input the correct num to running.")
+       os.exit()
 
 
 

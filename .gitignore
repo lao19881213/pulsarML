@@ -5,6 +5,8 @@
 #data 
 data/
 cache/
+shao/data/
+shao/cache/
 
 #code
 *.pyc

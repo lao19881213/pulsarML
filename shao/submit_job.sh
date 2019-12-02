@@ -11,4 +11,8 @@
 
 source /home/blao/rgz_rcnn/bashrc
 
-python /home/blao/pulsar_machine_learning/pulsarML/feats_and_plot.py --step 1 
+python /home/blao/pulsar_machine_learning/pulsarML/feats_and_plot.py --step 1
+
+python /home/blao/pulsar_machine_learning/pulsarML/main.py
+
+python /home/blao/pulsar_machine_learning/pulsarML/feats_and_plot.py --step 2 

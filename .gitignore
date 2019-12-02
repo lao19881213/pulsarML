@@ -1,5 +1,6 @@
 #plot
 *.pdf
+*.png
 
 #data 
 data/

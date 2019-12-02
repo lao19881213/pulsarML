@@ -1,9 +1,10 @@
 # pulsarML
 ## packages:  
 TensorFlow    
-keras    
+keras (recommend version keras==2.2.4)     
 h5py  
 cv2  
+## Tests on SHAO SRC-p
 
 ## Dataset: HTRU Medlat Training Dataset  
 

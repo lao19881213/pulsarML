@@ -36,7 +36,7 @@ def main():
         vali_y = np.array([ [0.,1.] if vali_y[x] == 1.0 else [1.,0.] for x in range(len(vali_y)) ])
         
         model.train_model(train_x, train_y, vali_x, vali_y)
-        data_y, pred = model.evaluate(vali_x, vali_y)
+        data_y, pred = model.evaluate(vali_x[1], vali_y)
         if i == 1:
             all_pred_y = pred;
             all_real_y = data_y;

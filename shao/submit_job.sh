@@ -10,7 +10,7 @@
 #SBATCH --export=all
 
 source /home/blao/rgz_rcnn/bashrc
-
+cd /home/blao/pulsar_machine_learning/pulsarML
 python /home/blao/pulsar_machine_learning/pulsarML/feats_and_plot.py --step 1
 
 python /home/blao/pulsar_machine_learning/pulsarML/main.py

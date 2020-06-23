@@ -85,7 +85,7 @@ class MedlatModel(object):
 		#top_tensor = Dropout(0.15)(top_tensor)
 		#top_tensor = Dense(2, activation='softmax')(top_tensor)
                 
-                self.model = ResnetBuilder.build_resnet_50((config.img_x,config.img_y,1),2)
+                self.model = ResnetBuilder.build_resnet_50((1,config.img_x,config.img_y),2)
 		#self.model = Model(inputs=[input2], outputs=dense)
 		# self.model = Model(inputs=[ input1], outputs=top_tensor)
 		sgd = keras.optimizers.SGD(lr=0.001, momentum=0.85, decay=1e-4, nesterov=False)
@@ -119,8 +119,7 @@ class MedlatModel(object):
 			self.model = load_model(self.model_file)
 		else:
 			self.build_model( input_dim = len(train_x[0][0]) )
-                        #print(train_y[1].shape)
-			self.fit_model( train_x[1], train_y, vali_x[1], vali_y)
+			self.fit_model( train_x, train_y, vali_x, vali_y)
 			self.model.save(self.model_file)
 
 	# 评估模型

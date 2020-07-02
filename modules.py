@@ -48,11 +48,12 @@ class MedlatModel(object):
 		input3 = Input((config.img_x,config.img_y,1)) 
 
 		# 一维特征深度网络 
-		#x1 = Dense(32, activation='relu')(input1)
-		#x1 = Dropout(0.15)(x1)
-		#x1 = Dense(8, activation='relu')(x1)
+		x1 = Dense(32, activation='relu')(input1)
+		x1 = Dropout(0.15)(x1)
+		x1 = Dense(8, activation='relu')(x1)
 
 		## s/n 矩阵特征卷积网络 
+                x2 = ResnetBuilder.build_resnet_18(input2,2)
 		#x2 = Conv2D(2, (3, 3), padding='same')(input2) # 62*62*8
 		#x2 = MaxPooling2D((2, 2), strides=(1, 1), padding='same')(x2) # 31*31*8
 		#x2 = Conv2D(4, (3, 3), padding='same')(x2) # 29*29*16
@@ -67,6 +68,7 @@ class MedlatModel(object):
 		#x2 = Dense(8, activation='relu')(x2)
 
 		## s/n 矩阵特征卷积网络 
+                x3 = ResnetBuilder.build_resnet_18(input3,2)
 		#x3 = Conv2D(2, (3, 3), padding='same')(input3) # 62*62*8
 		#x3 = MaxPooling2D((2, 2), strides=(1, 1), padding='same')(x3) # 31*31*8
 		#x3 = Conv2D(4, (3, 3), padding='same')(x3) # 29*29*16
@@ -80,16 +82,16 @@ class MedlatModel(object):
 		#x3 = Dropout(0.15)(x3)
 		#x3 = Dense(8, activation='relu')(x3)
 
-		#top_tensor = concatenate([x1,x2], axis=1)
-		#top_tensor = Dense(8, activation='relu')(top_tensor)
-		#top_tensor = Dropout(0.15)(top_tensor)
-		#top_tensor = Dense(2, activation='softmax')(top_tensor)
+		top_tensor = concatenate([x1,x2], axis=1)
+		top_tensor = Dense(8, activation='relu')(top_tensor)
+		top_tensor = Dropout(0.15)(top_tensor)
+		top_tensor = Dense(2, activation='softmax')(top_tensor)
                 
-                self.model = ResnetBuilder.build_resnet_50((config.img_x,config.img_y,1),2)
-		#self.model = Model(inputs=[input2], outputs=dense)
+                #self.model = ResnetBuilder.build_resnet_18((config.img_x,config.img_y,1),2)
+		self.model = Model(inputs=[input1,input2,input3], outputs=top_tensor)
 		# self.model = Model(inputs=[ input1], outputs=top_tensor)
-		sgd = keras.optimizers.SGD(lr=0.001, momentum=0.85, decay=1e-4, nesterov=False)
-		adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+		sgd = keras.optimizers.SGD(lr=0.001, momentum=0.9, decay=0.00001, nesterov=False)
+		adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-8)
 		self.model.compile( loss="categorical_crossentropy", optimizer = adam, metrics=["acc"])
 
 	# 模型设置
@@ -120,7 +122,7 @@ class MedlatModel(object):
 		else:
 			self.build_model( input_dim = len(train_x[0][0]) )
                         #print(train_y[1].shape)
-			self.fit_model( train_x[1], train_y, vali_x[1], vali_y)
+			self.fit_model( train_x, train_y, vali_x, vali_y)
 			self.model.save(self.model_file)
 
 	# 评估模型

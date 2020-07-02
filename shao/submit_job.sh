@@ -2,7 +2,7 @@
 
 # Tests 
 
-#SBATCH --partition=inspur-gpu-ib
+#SBATCH --partition=inspur-gpu-opa
 #SBATCH --time=12:00:00
 #SBATCH --job-name=pulsar_m
 #SBATCH --nodes=1

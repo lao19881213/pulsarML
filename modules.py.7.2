@@ -85,11 +85,11 @@ class MedlatModel(object):
 		#top_tensor = Dropout(0.15)(top_tensor)
 		#top_tensor = Dense(2, activation='softmax')(top_tensor)
                 
-                self.model = ResnetBuilder.build_resnet_50((config.img_x,config.img_y,1),2)
+                self.model = ResnetBuilder.build_resnet_18((config.img_x,config.img_y,1),2)
 		#self.model = Model(inputs=[input2], outputs=dense)
 		# self.model = Model(inputs=[ input1], outputs=top_tensor)
-		sgd = keras.optimizers.SGD(lr=0.001, momentum=0.85, decay=1e-4, nesterov=False)
-		adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+		sgd = keras.optimizers.SGD(lr=0.001, momentum=0.9, decay=0.00001, nesterov=False)
+		adam = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=1e-8)
 		self.model.compile( loss="categorical_crossentropy", optimizer = adam, metrics=["acc"])
 
 	# 模型设置
@@ -120,7 +120,7 @@ class MedlatModel(object):
 		else:
 			self.build_model( input_dim = len(train_x[0][0]) )
                         #print(train_y[1].shape)
-			self.fit_model( train_x[1], train_y, vali_x[1], vali_y)
+			self.fit_model( train_x[2], train_y, vali_x[2], vali_y)
 			self.model.save(self.model_file)
 
 	# 评估模型
